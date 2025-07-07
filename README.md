@@ -9,3 +9,14 @@ This application coupled with the ECS Manifest applciation allowed the machines 
 - Use the ECS Manifest tool to create an XML manifest of the current release and place it in the share.
 - Point the shortcut to launch the application at the ECSUpdater.exe application.
 - Launch the application
+
+The application will then do the following:
+- The application will copy the manifest.xml file locally
+- Then compare the hash value of the file to what is present in the manifest.
+- If the updater (stub launcher) finds a difference in one of the hashes, it stops checking the files and immediately begins copying the contents of the network share locally.
+- Once all of the files from the network share have been copied locally it will launch the EXE defined in the configuration file.
+
+We had two groups we utilized this application with.  We had a "test group" and the "normal users" group.  We simply pointed the users at different network shares to achive this.
+
+## Errors:
+- If an error occurs (can't copy the XML file from network share.. etc) the stub launcher will simply go straight to launching the EXE.
